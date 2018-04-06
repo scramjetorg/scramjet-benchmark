@@ -1,0 +1,32 @@
+
+/* eslint no-console: 0 no-process-exit: 0 */
+const path = require('path');
+const si = require('si');
+const {runBench} = require('../lib/run-bench');
+
+const file = path.resolve(process.cwd(), process.argv[2]);
+const benches = process.argv.slice(3);
+
+let prev = {
+    ts: Date.now(),
+    user: 0, heapTotal: 0, heapUsed: 0, rss: 0
+};
+
+(async () => {
+    for (let bench of benches) {
+        await runBench(file, bench, ({name, data, ts, cpuUsage: {user}, memoryUsage: {heapTotal, heapUsed, rss}}) => {
+            const ref = {ts, user, heapTotal, heapUsed, rss};
+            const diff = Object.keys(ref).map((key) => {
+                const diff = ref[key] - prev[key];
+                const sign = diff > 0 ? '+' : '';
+
+                return `${key}: ${sign + si.format(diff)}`;
+            }).join(', ');
+
+            console.error(`* ${name} ${diff}`);
+            if (data)
+                console.error("  -> ", data);
+            prev = ref;
+        });
+    }
+})();
