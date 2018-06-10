@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const {DataStream} = require('scramjet');
+const aigle =  require("aigle");
 
 const mapper = (data) => crypto.createHash("md5").update('xyz').update(data).update('ijk').digest('hex');
 const filter = (hex) => hex[0] === 'f';
@@ -23,12 +24,22 @@ module.exports = {
         async scramjet({gen, dat}) {
             return DataStream.fromIterator(gen())
                 .map(mapper)
+                .map(mapper)
+                .map(mapper)
                 .filter(filter)
                 .reduce(reducer, dat)
             ;
         },
+        aigle({gen, dat}) {
+            return new aigle(Array.from(gen()))
+                .map(mapper)
+                .filter(filter)
+                .reduce(reducer, dat);
+        },
         array({gen, dat}) {
             return Array.from(gen())
+                .map(mapper)
+                .map(mapper)
                 .map(mapper)
                 .filter(filter)
                 .reduce(reducer, dat);

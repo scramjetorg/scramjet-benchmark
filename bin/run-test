@@ -1,5 +1,6 @@
+#!/usr/bin/env node
+/* eslint no-console: 0, no-process-exit: 0 */
 
-/* eslint no-console: 0 no-process-exit: 0 */
 const path = require('path');
 const si = require('si');
 const {runBench} = require('../lib/run-bench');
@@ -23,7 +24,7 @@ let prev = {
                 return `${key}: ${sign + si.format(diff)}`;
             }).join(', ');
 
-            console.error(`* ${name} ${diff}`);
+            console.error(`* ${bench} ${name} ${diff}`);
             if (data)
                 console.error("  -> ", data);
             prev = ref;

@@ -12,24 +12,15 @@
   "author": "Signicode <opensource@signicode.com>",
   "license": "MIT",
   "dependencies": {
-    "scramjet-cli": "^1.2.0",
-    "scramjet": "^4.8.0",
+    "aigle": "^1.12.0",
+    "lodash": "^4.17.10",
+    "promise-async": "^0.2.0",
+    "scramjet": "^4.15.2",
     "si": "^2.0.0"
   },
   "devDependencies": {
-    "dmd": "^3.0.11",
     "eslint": "^4.19.1",
     "eslint-config-defaults": "^9.0.0",
-    "eslint-plugin-node": "^6.0.1",
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-eslint": "^4.0.2",
-    "gulp-nodeunit-runner": "^0.2.2",
-    "gulp-rename": "^1.2.2",
-    "gulp-util": "^3.0.7",
-    "jsdoc": "^3.5.5",
-    "jsdoc-api": "^4.0.3",
-    "jsdoc-parse": "^3.0.1",
-    "nodeunit": "^0.11.0"
+    "eslint-plugin-node": "^6.0.1"
   }
 }
