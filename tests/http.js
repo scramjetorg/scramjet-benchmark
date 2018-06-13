@@ -57,7 +57,6 @@ module.exports = {
             return DataStream.fromIterator(gen())
                 .setOptions({maxParallel: 512})
                 .map(get)
-                // .filter(filter)
                 .map(get)
                 .map(get)
                 .filter(filter)
@@ -69,15 +68,8 @@ module.exports = {
 
             let arr = await new Promise((res, rej) => {
                 async.mapLimit(data, 512, async (item) => {
-                    return get(item);
-                }, (err, result) => err ? rej(err) : res(result));
-            });
-
-            // arr = arr.filter(filter);
-
-            arr = await new Promise((res, rej) => {
-                async.mapLimit(arr, 512, async (item) => {
                     let data = await get(item);
+                    data = await get(data);
                     return get(data);
                 }, (err, result) => err ? rej(err) : res(result));
             });
@@ -88,7 +80,6 @@ module.exports = {
             let data = Array.from(gen());
 
             data = await Promise.all(_.map(data, get));
-            // data = await Promise.all(_.filter(data, filter));
             data = await Promise.all(_.map(data, get));
             data = await Promise.all(_.map(data, get));
             data = await Promise.all(_.filter(data, filter));
