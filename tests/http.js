@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const http = require("http");
 const {DataStream} = require('scramjet');
 const _ =  require("lodash");
-const async = require("promise-async");
+const async = require("async");
 
 const PORT = 12387;
 
@@ -57,6 +57,7 @@ module.exports = {
             return DataStream.fromIterator(gen())
                 .setOptions({maxParallel: 512})
                 .map(get)
+                // .filter(filter)
                 .map(get)
                 .map(get)
                 .filter(filter)
@@ -65,10 +66,20 @@ module.exports = {
         },
         async async({gen, dat}) {
             let data = Array.from(gen());
-            const arr = await async.mapLimit(data, 512, async (item) => {
-                let data = await get(item);
-                data = await get(data);
-                return get(data);
+
+            let arr = await new Promise((res, rej) => {
+                async.mapLimit(data, 512, async (item) => {
+                    return get(item);
+                }, (err, result) => err ? rej(err) : res(result));
+            });
+
+            // arr = arr.filter(filter);
+
+            arr = await new Promise((res, rej) => {
+                async.mapLimit(arr, 512, async (item) => {
+                    let data = await get(item);
+                    return get(data);
+                }, (err, result) => err ? rej(err) : res(result));
             });
 
             return arr.filter(filter).reduce(reducer, dat);
@@ -77,6 +88,7 @@ module.exports = {
             let data = Array.from(gen());
 
             data = await Promise.all(_.map(data, get));
+            // data = await Promise.all(_.filter(data, filter));
             data = await Promise.all(_.map(data, get));
             data = await Promise.all(_.map(data, get));
             data = await Promise.all(_.filter(data, filter));

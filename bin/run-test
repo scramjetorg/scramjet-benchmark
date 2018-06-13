@@ -3,7 +3,7 @@
 
 const path = require('path');
 const si = require('si');
-const {runBench} = require('../lib/run-bench');
+const {runBench, getBenches} = require('../lib/run-bench');
 
 const file = path.resolve(process.cwd(), process.argv[2]);
 const benches = process.argv.slice(3);
@@ -14,9 +14,12 @@ let prev = {
 };
 
 (async () => {
+    if (benches.length === 0) {
+        benches.push(... await getBenches(file));
+    }
     for (let bench of benches) {
-        await runBench(file, bench, ({name, data, ts, cpuUsage: {user}, memoryUsage: {heapTotal, heapUsed, rss}}) => {
-            const ref = {ts, user, heapTotal, heapUsed, rss};
+        await runBench(file, bench, ({name, data, ts, cpuUsage: {user, system}, memoryUsage: {heapTotal, heapUsed, rss}}) => {
+            const ref = {ts, user, system, heapTotal, heapUsed, rss};
             const diff = Object.keys(ref).map((key) => {
                 const diff = ref[key] - prev[key];
                 const sign = diff > 0 ? '+' : '';

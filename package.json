@@ -13,8 +13,8 @@
   "license": "MIT",
   "dependencies": {
     "aigle": "^1.12.0",
+    "async": "^2.6.1",
     "lodash": "^4.17.10",
-    "promise-async": "^0.2.0",
     "scramjet": "^4.15.2",
     "si": "^2.0.0"
   },
