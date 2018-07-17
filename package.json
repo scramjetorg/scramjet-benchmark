@@ -19,7 +19,7 @@
     "si": "^2.0.0"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
+    "eslint": "^5.1.0",
     "eslint-config-defaults": "^9.0.0",
     "eslint-plugin-node": "^6.0.1"
   }
