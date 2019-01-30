@@ -12,10 +12,10 @@
   "author": "Signicode <opensource@signicode.com>",
   "license": "MIT",
   "dependencies": {
-    "aigle": "^1.12.0",
+    "aigle": "^1.13.0",
     "async": "^2.6.1",
     "lodash": "^4.17.11",
-    "scramjet": "^4.20.4",
+    "scramjet": "^4.21.0",
     "si": "^2.0.0"
   },
   "devDependencies": {
