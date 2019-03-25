@@ -1,6 +1,6 @@
 {
   "name": "scramjet-benchmark",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "A module that tests relative performance of some scramjet tasks.",
   "main": "index.js",
   "scripts": {
