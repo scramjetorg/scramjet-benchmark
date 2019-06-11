@@ -15,7 +15,7 @@
     "aigle": "^1.14.0",
     "async": "^3.0.1",
     "lodash": "^4.17.11",
-    "scramjet": "^4.25.0",
+    "scramjet": "^4.25.1",
     "si": "^2.0.0"
   },
   "devDependencies": {
