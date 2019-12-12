@@ -19,7 +19,7 @@
     "lodash": "^4.17.11",
     "scramjet": "^4.25.3",
     "si": "^2.0.0",
-    "snyk": "^1.230.6"
+    "snyk": "^1.258.2"
   },
   "devDependencies": {
     "eslint": "^6.0.1",
