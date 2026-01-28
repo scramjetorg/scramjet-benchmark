@@ -16,10 +16,10 @@
   "dependencies": {
     "aigle": "^1.14.1",
     "async": "^3.1.0",
-    "lodash": "^4.17.16",
+    "lodash": "^4.17.23",
     "scramjet": "^4.35.13",
     "si": "^2.0.0",
-    "snyk": "^1.514.0"
+    "snyk": "^1.996.0"
   },
   "devDependencies": {
     "eslint": "^7.23.0",
